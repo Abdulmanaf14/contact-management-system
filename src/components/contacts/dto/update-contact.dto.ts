@@ -1,4 +1,7 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateContactDto } from './create-contact.dto';
+import { IsBoolean, IsNotEmpty, isBoolean } from "class-validator";
 
-export class UpdateContactDto extends PartialType(CreateContactDto) {}
+    export class UpdateSpamStatusDto {
+        @IsNotEmpty()
+        @IsBoolean()
+        isSpam?: boolean;
+      }

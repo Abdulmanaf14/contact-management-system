@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session,HttpCode } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
@@ -57,6 +57,18 @@ export class UsersController {
     }
     const user = await this.usersService.findById(session.userId,session);
     return session ;
+  }
+  @Post('logout')
+  @HttpCode(200)
+  async logout(@Session() session: Record<string, any>): Promise<string> {
+    console.log("sess",session);
+    if(!session.accessToken){
+      throw new BadRequestException('Logout failed.');
+    }
+    session.destroy((err) => {
+      console.log("err",err);
+  })
+    return 'Logout successful';
   }
 
  
