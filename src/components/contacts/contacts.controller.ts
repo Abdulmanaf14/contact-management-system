@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session, UnauthorizedException, NotFoundException, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session, UnauthorizedException, NotFoundException, Query, Req, UseGuards } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
 import { AuthService } from 'src/auth/auth.service';
 import { UpdateSpamStatusDto } from './dto/update-contact.dto';
+import { AuthGuard } from 'src/authguard/auth.guard';
 
 @Controller('contacts')
 export class ContactsController {
@@ -10,11 +11,19 @@ export class ContactsController {
     private readonly authService: AuthService,  ) {}
 
   @Post('addContact')
-  async create(@Body() contact: Contact,@Session() session: Record<string, any>) {
-    console.log("sess",session);
-    const accessToken = session.accessToken;
+  @UseGuards(AuthGuard)
+  async create(@Body() contact: Contact,@Session() session: Record<string, any>, @Req() request: Request) {
+
+    const authHeader = request.headers['authorization'];
+    const accessToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : session.accessToken;
+ath nicheyyenda SVGRadialGradientElement    
     if (!accessToken) {
       throw new UnauthorizedException('Access token not found in session.');
+    }
+    
+    const isValidToken = this.authService.verifyAccessToken(accessToken);
+    if (!isValidToken) {
+      throw new UnauthorizedException('Invalid access token.');
     }
     if(contact.phoneNumber!=undefined){
     const existingUser = await this.contactsService.findByPhoneNumber(contact.phoneNumber);

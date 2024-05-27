@@ -9,6 +9,7 @@ import { Contact } from './components/contacts/entities/contact.entity';
 import { ConfigModule } from '@nestjs/config';
 import {  SessionModule } from 'nestjs-session';
 import session from 'express-session';
+import { SECRET_KEY } from './constants';
 
 
 
@@ -36,10 +37,10 @@ export class AppModule {
     consumer
       .apply(
         session({
-          secret: '8676hgjkdfhgkf788fgjkh', // change this to a secure key
+          secret: SECRET_KEY, // change this to a secure key
           resave: false,
           saveUninitialized: false,
-          cookie: { maxAge: 360000000}, // 1 hour
+          cookie: { maxAge: 360000}, // 1 hour
         }),
       )
       .forRoutes('*');

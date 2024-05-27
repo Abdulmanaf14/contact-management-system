@@ -1,10 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { Session } from 'express-session';
 import * as jwt from 'jsonwebtoken';
+import { SECRET_KEY } from 'src/constants';
 
 @Injectable()
 export class AuthService {
-  private readonly secretKey = 'qwertyuioplkjhgfdsazxcvbm';
+  private readonly secretKey = SECRET_KEY;
 
   generateAccessToken(userId: number): string {
     return jwt.sign({ userId }, this.secretKey, { expiresIn: '1h' }); 
