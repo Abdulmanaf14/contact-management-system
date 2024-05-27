@@ -15,8 +15,7 @@ export class ContactsController {
   async create(@Body() contact: Contact,@Session() session: Record<string, any>, @Req() request: Request) {
 
     const authHeader = request.headers['authorization'];
-    const accessToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : session.accessToken;
-ath nicheyyenda SVGRadialGradientElement    
+    const accessToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : session.accessToken;    
     if (!accessToken) {
       throw new UnauthorizedException('Access token not found in session.');
     }
