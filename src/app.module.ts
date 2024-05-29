@@ -15,14 +15,18 @@ import { SECRET_KEY } from './constants';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true,
+      envFilePath: ['.env.development.local', '.env'], }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        url: configService.get<string>('postgres://default:6RiE9VxzpeNI@ep-ancient-bread-a4btpvf3.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require'),
+        url: configService.get<string>('POSTGRES_URL'),
         entities: [User, Contact],
         synchronize: true,
+        ssl: {
+          rejectUnauthorized: false,
+        },
       }),
       inject: [ConfigService],
     }),
