@@ -6,7 +6,8 @@ import { UpdateSpamStatusDto } from './dto/update-contact.dto';
 import { AuthGuard } from '../../authguard/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 
-@Controller('contacts')
+
+@Controller()
 export class ContactsController {
   constructor(private readonly contactsService: ContactsService,
     private readonly authService: AuthService,  ) {}

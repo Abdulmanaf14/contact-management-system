@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session,HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session,HttpCode, Logger } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { AuthService } from '../../auth/auth.service';
 
-@Controller('users')
+@Controller()
 export class UsersController {
   constructor(private readonly usersService: UsersService,
     private readonly authService: AuthService,
@@ -12,7 +12,6 @@ export class UsersController {
 
   @Post('register')
   async register(@Body() user: User): Promise<User> {
-    
     if(!user.password || !user.phoneNumber || !user.name){
       throw new BadRequestException('Name, phone number, and password are required.');
     }

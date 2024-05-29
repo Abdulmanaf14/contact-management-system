@@ -10,11 +10,14 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import {  SessionModule } from 'nestjs-session';
 import session from 'express-session';
 import { SECRET_KEY } from './constants';
+import { RouterModule } from '@nestjs/core';
+import { APP_ROUTES } from './constants/routes';
 
 
 
 @Module({
   imports: [
+    RouterModule.register(APP_ROUTES),
     ConfigModule.forRoot({ isGlobal: true,
       envFilePath: ['.env.development.local', '.env'], }),
     TypeOrmModule.forRootAsync({
