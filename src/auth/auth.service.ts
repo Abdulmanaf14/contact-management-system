@@ -15,7 +15,9 @@ export class AuthService {
       return jwt.verify(token, this.secretKey) as { userId: number };
     } catch (error) {
       throw new UnauthorizedException('Invalid access token.');
+      
     }
+    
   }
 
 }

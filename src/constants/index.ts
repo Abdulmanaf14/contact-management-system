@@ -5,7 +5,7 @@ import packageJson from 'package.json';
 export const DEBUG_LEVEL = process.env.FEDO_ID_SERVER_LOG_LEVEL || 'debug';
 export const PORT = parseInt(process.env.FEDO_ID_SERVER_PORT || '', 10) || 38000;
 export const HOST = process.env.FEDO_ID_SERVER_HOST || '0.0.0.0';
-export const SECRET_KEY = process.env.SECRET_KEY || 'qwertyuioplkjhgfdsazxcvbm';
+export const SECRET_KEY = 'qwertyuioplkjhgfdsazxcvbm';
 export const APP_VERSION = packageJson.version;
 
 

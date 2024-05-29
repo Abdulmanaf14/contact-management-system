@@ -3,11 +3,14 @@ import { AppModule } from './app.module';
 import { APP_VERSION, HOST, PORT, debugLevel } from './constants';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import * as session from 'express-session';
+import compression from 'compression';
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule, {
 		logger: debugLevel
 	});
+	app.use(compression());
+
 	// app.use(
 	// 	session({
 	// 	  secret: 'my-secret',

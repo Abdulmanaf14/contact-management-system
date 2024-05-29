@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException,
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Controller('users')
 export class UsersController {

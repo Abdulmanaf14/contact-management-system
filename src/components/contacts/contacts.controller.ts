@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Session, UnauthorizedException, NotFoundException, Query, Req, UseGuards } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { Contact } from './entities/contact.entity';
-import { AuthService } from 'src/auth/auth.service';
+
 import { UpdateSpamStatusDto } from './dto/update-contact.dto';
-import { AuthGuard } from 'src/authguard/auth.guard';
+import { AuthGuard } from '../../authguard/auth.guard';
+import { AuthService } from '../../auth/auth.service';
 
 @Controller('contacts')
 export class ContactsController {
