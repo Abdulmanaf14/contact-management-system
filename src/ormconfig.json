@@ -1,0 +1,7 @@
+{
+    "type": "postgres",
+    "url": "postgres://default:6RiE9VxzpeNI@ep-ancient-bread-a4btpvf3.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+    "synchronize": true,
+    "entities": ["dist/**/*.entity{.ts,.js}"]
+  }
+  
