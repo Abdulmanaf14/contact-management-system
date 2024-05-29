@@ -28,7 +28,12 @@ import { SECRET_KEY } from './constants';
     }),
     UsersModule, ContactsModule, SessionModule.forRoot({
       session: { secret: 'contact use' },
-    }),],
+    }),
+    ContactsModule,
+    UsersModule
+
+  ],
+
   controllers: [AppController],
   providers: [AppService],
 })
