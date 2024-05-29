@@ -21,6 +21,9 @@ async function bootstrap() {
 	//   );
 
 	app.useGlobalPipes(new ValidationPipe());
+	app.enableCors({
+		origin: '*', // Adjust according to your requirements
+	  });
 
 	await app.listen(PORT, HOST, () => {
 		Logger.debug(
