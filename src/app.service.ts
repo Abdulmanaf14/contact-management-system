@@ -8,7 +8,11 @@ export class AppService {
   constructor(private configService: ConfigService) {
     this.logger.log(`Database URL: ${this.configService.get<string>('DATABASE_URL')}`);
   }
-  getHello(): string {
-    return 'Hello World! ';
+  getHello() {
+    return {
+			server: 'Contact Server',
+			version: '1.0',
+			documentation: "https://contact.doc.in",
+		};
   }
 }
